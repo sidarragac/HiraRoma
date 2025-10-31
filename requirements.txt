@@ -1,0 +1,11 @@
+# Flask y extensiones
+Flask==3.0.0
+
+# Google Cloud APIs
+google-cloud-translate==2.0.1
+
+# Variables de entorno
+python-dotenv==1.0.0
+
+# Utilidades
+requests==2.31.0
