@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Japonés Hiragana a Español - Traductor de Cadenas</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#135bec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#101622",
+          },
+          fontFamily: {
+            display: ["Lexend", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d121b] dark:text-gray-100">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root"
+    style="font-family: Lexend, 'Noto Sans', sans-serif">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col w-full max-w-6xl flex-1">
+          <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-4 sm:px-10 py-3">
+            <div class="flex items-center gap-4 text-[#0d121b] dark:text-white">
+              <div class="size-6 text-primary">
+                <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z">
+                  </path>
+                </svg>
+              </div>
+              <h1 class="text-[#0d121b] dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                Japonés Hiragana a Español
+              </h1>
+            </div>
+          </header>
+
+          <main class="flex-1 mt-8">
+            <div class="flex flex-wrap justify-between gap-3 p-4">
+              <div class="flex flex-col gap-2">
+                <p class="text-[#0d121b] dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">
+                  Traductor de Hiragana
+                </p>
+                <p class="text-[#4c669a] dark:text-gray-400 text-base font-normal leading-normal">
+                  Sube una imagen para traducir cadenas de caracteres Hiragana
+                  a Español.
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col items-center justify-center gap-8 mt-6 p-4 flex-1">
+              <div class="flex flex-col items-center gap-6 w-full max-w-lg">
+                <div id="image-dropzone"
+                  class="flex flex-col items-center justify-center w-full min-h-[200px] rounded-xl border-2 border-dashed border-gray-300 dark:border-gray-600 bg-white dark:bg-background-dark p-6 text-center"
+                  ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                  <span class="material-symbols-outlined text-5xl text-gray-400 dark:text-gray-500 mb-4">image</span>
+                  <h3 class="text-lg font-semibold text-[#0d121b] dark:text-white">
+                    Arrastra y suelta una imagen aquí
+                  </h3>
+                  <p class="text-sm text-[#4c669a] dark:text-gray-400 mt-1">
+                    o
+                  </p>
+                  <button id="upload-button"
+                    class="flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors mt-4">
+                    <span class="material-symbols-outlined" data-icon="upload_file">upload_file</span>
+                    <span class="truncate">Adjuntar Imagen</span>
+                  </button>
+                  <p class="text-xs text-center text-[#4c669a] dark:text-gray-500 mt-4">
+                    Formatos aceptados: JPG, PNG.
+                  </p>
+                  <img id="image-preview" src="" alt="Imagen cargada" class="hidden mt-4 max-w-full rounded-lg" />
+                </div>
+              </div>
+              <div
+                class="w-full max-w-lg flex flex-col gap-4 rounded-xl bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex justify-between items-center">
+                  <h2 class="text-[#0d121b] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">
+                    Hiragana Detectado
+                  </h2>
+                </div>
+                {% if viewData['count'] == 0 %}
+                  <div
+                    class="flex flex-1 items-center justify-center rounded-lg bg-background-light dark:bg-gray-800 min-h-48 p-4">
+                    <p class="text-[#4c669a] dark:text-gray-500 text-center">
+                      Los caracteres Hiragana detectados aparecerán aquí.
+                    </p>
+                  </div>
+                {% else %}
+                  {% for hiragana, romanized, image in viewData['predicted_char'] | zip(viewData['romanized_char'], viewData['images']) %}
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                      <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
+                        <p class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
+                          Entrada</p>
+                        <img src="{{ image }}" alt="Hiragana ingresado" class="text-4xl font-bold text-text-light dark:text-text-dark">
+                      </div>
+                      <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
+                        <p class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
+                          Hiragana</p>
+                        <p class="text-4xl font-bold text-text-light dark:text-text-dark">{{ hiragana }}</p>
+                      </div>
+                      <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
+                        <p class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
+                          Romaji</p>
+                        <p class="text-4xl font-bold text-text-light dark:text-text-dark">{{ romanized }}</p>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+              <div
+                class="w-full max-w-lg flex flex-col gap-4 rounded-xl bg-white dark:bg-background-dark border border-gray-200 dark:border-gray-700 p-6">
+                <div class="flex justify-between items-center">
+                  <h2 class="text-[#0d121b] dark:text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">
+                    Traducción al Español
+                  </h2>
+                </div>
+                {% if viewData['count'] < 2 %}
+                  <div
+                    class="flex flex-1 items-center justify-center rounded-lg bg-background-light dark:bg-gray-800 min-h-48 p-4">
+                    <p class="text-[#4c669a] dark:text-gray-500 text-center">
+                      La traducción aparecerá aquí.
+                    </p>
+                  </div>
+                {% else %}
+                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
+                      <p class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
+                        Japonés</p>
+                      <p class="text-4xl font-bold text-text-light dark:text-text-dark">{{ viewData['hiragana_word'] }}</p>
+                    </div>
+                    <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
+                      <p class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
+                        Español</p>
+                      <p class="text-4xl font-bold text-text-light dark:text-text-dark">{{ viewData['romanized_word'] }}</p>
+                    </div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  // Maneja el evento cuando se arrastra la imagen sobre la zona
+  function handleDragOver(event) {
+    event.preventDefault(); // Previene el comportamiento predeterminado
+    event.stopPropagation(); // Evita que el evento se propague
+    event.dataTransfer.dropEffect = 'copy'; // Muestra el cursor de "copiar"
+  }
+
+  // Maneja el evento cuando se deja caer la imagen en la zona
+  function handleDrop(event) {
+    event.preventDefault(); // Previene el comportamiento predeterminado
+    event.stopPropagation(); // Evita que el evento se propague
+
+    // Obtener el archivo de la imagen desde el evento
+    const files = event.dataTransfer.files;
+
+    if (files && files.length > 0) {
+      const imageFile = files[0]; // Solo tomamos el primer archivo
+
+      // Comprobamos que el archivo sea una imagen
+      if (imageFile.type.startsWith("image/")) {
+        displayImagePreview(imageFile);
+      } else {
+        alert("Por favor, sube un archivo de imagen.");
+      }
+    }
+  }
+
+  // Función para mostrar la vista previa de la imagen
+  function displayImagePreview(file) {
+    const reader = new FileReader();
+
+    // Cuando el archivo se lee correctamente
+    reader.onload = function (e) {
+      const imgElement = document.getElementById("image-preview");
+      imgElement.src = e.target.result; // Establecer la vista previa de la imagen
+      imgElement.classList.remove("hidden"); // Mostrar la imagen
+    };
+
+    // Leemos el archivo como una URL de datos
+    reader.readAsDataURL(file);
+  }
+
+  // Maneja la carga de la imagen desde el botón de "subir"
+  document.getElementById("upload-button").addEventListener("click", function () {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*"; // Acepta solo imágenes
+
+    input.addEventListener("change", function () {
+      const file = input.files[0]; // Obtener el archivo seleccionado
+      if (file) {
+        displayImagePreview(file);
+      }
+    });
+
+    input.click(); // Simula un clic para abrir el selector de archivos
+  });
+</script>
+
+</html>
