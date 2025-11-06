@@ -80,12 +80,12 @@ class Transliterator:
     def transliterate(self, char):
         roma = self.equivalences.get(char)
         if roma:
-            return roma
+            return (char, roma)
         
         single_char = self.doubles.get(char, '') # Default '', but will never reach that condition.
         roma = self.equivalences.get(single_char)
 
-        return roma
+        return (single_char, roma)
 
     def transliterate_text(self, text):
         roma_text = []
