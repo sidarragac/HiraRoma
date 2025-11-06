@@ -26,7 +26,7 @@ def process_text(image):
     predictor = ImagePredictor()
     transliterator = Transliterator()
 
-    count = processor.get_grid()
+    count = processor.get_grid(folder_path)
     image_files = [f"{folder_path}/{f}" for f in os.listdir(folder_path)]
 
     viewData = {}
@@ -36,23 +36,25 @@ def process_text(image):
     if count == 1:
         predicted_char = predictor.predict_image(img_path)
         char, romanized_char = transliterator.transliterate(predicted_char)
+        
+        viewData['zip'] = [(char, romanized_char, image_files[0])]
 
-        viewData['predicted_char'] = char
-        viewData['romanized_char'] = romanized_char
         viewData['hiragana_word'] = ''
         viewData['romanized_word'] = ''
         return render_template('translation/translate.html', viewData=viewData)
 
     predicted_char =  predictor.predict_images_in_folder(folder_path)
     res = transliterator.transliterate_text(predicted_char)
+    
     predicted_arr = []
     romanized_arr = []
     for char, romanized_char in res:
         predicted_arr.append(char)
         romanized_arr.append(romanized_char)
-    viewData['predicted_char'] = predicted_arr
-    viewData['romanized_char'] = romanized_arr
+
+    viewData['zip'] = list(zip(predicted_arr, romanized_arr, image_files))
+
     viewData['hiragana_word'] = ''.join(predicted_arr)
     viewData['romanized_word'] = ''.join(romanized_arr) 
 
-    return render_template('translation/processed_char.html', viewData=viewData)
+    return render_template('translation/translate.html', viewData=viewData)
