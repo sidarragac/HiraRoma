@@ -127,7 +127,7 @@
                   <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
                     <p class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
                       Entrada</p>
-                    <img src="{{ image }}" alt="Hiragana ingresado"
+                    <img src="{{ url_for('uploads.uploaded_file', filename=image) }}" alt="Hiragana ingresado"
                       class="text-4xl font-bold text-text-light dark:text-text-dark">
                   </div>
                   <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
