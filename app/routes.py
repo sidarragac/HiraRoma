@@ -1,10 +1,8 @@
 from flask import Blueprint, request
 from controllers.home import home
 from controllers.translator import (
-    translate_char,
-    process_char,
     translate_text,
-    # process_text
+    process_text
 )
 
 # Blueprints
@@ -16,27 +14,16 @@ translate_bp = Blueprint('translate', __name__)
 def index():
     return home()
 
-@translate_bp.route('/char', methods=['GET'])
-def translate_one():
-    return translate_char()
-
-@translate_bp.route('/char/result', methods=['POST'])
-def translate_one_result():
-    if 'image' not in request.files:
-        return {'error': 'No image provided'}, 400
-    image = request.files['image']
-    return process_char(image)
-
-@translate_bp.route('/text', methods=['GET'])
+@translate_bp.route('/', methods=['GET'])
 def translate():
     return translate_text()
 
-# @translate_bp.route('/text/result', methods=['POST'])
-# def translate_result():
-#     if 'image' not in request.files:
-#         return {'error': 'No image provided'}, 400
-#     image = request.files['image']
-#     return process_text(image)
+@translate_bp.route('/result', methods=['POST'])
+def translate_result():
+    if 'image' not in request.files:
+        return {'error': 'No image provided'}, 400
+    image = request.files['image']
+    return process_text(image)
 
 def register_routes(app):
     app.register_blueprint(home_bp, url_prefix='/')
