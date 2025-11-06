@@ -11,7 +11,7 @@ class ImageProcessor:
         extrema = img.getextrema()
         return extrema == (255, 255)
 
-    def get_grid(self, output_folder="cuadros_divididos"):
+    def get_grid(self, output_folder="uploads"):
         img_width, img_height = self.img.size
 
         os.makedirs(output_folder, exist_ok=True)
