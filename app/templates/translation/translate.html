@@ -75,8 +75,8 @@
               </div>
             </div>
             <div class="flex flex-col items-center justify-center gap-8 mt-6 p-4 flex-1">
-              <form id="upload-form" action="/translate" method="POST"
-                enctype="multipart/form-data" class="flex flex-col items-center gap-6 w-full max-w-lg">
+              <form id="upload-form" action="/translate" method="POST" enctype="multipart/form-data"
+                class="flex flex-col items-center gap-6 w-full max-w-lg">
 
                 <!-- Dropzone -->
                 <div id="image-dropzone"
@@ -122,8 +122,7 @@
                   </p>
                 </div>
                 {% else %}
-                {% for hiragana, romanized, image in viewData['predicted_char'] | zip(viewData['romanized_char'],
-                viewData['images']) %}
+                {% for hiragana, romanized, image in viewData['zip'] %}
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
                   <div class="flex flex-col gap-1 rounded-lg bg-background-light dark:bg-background-dark p-4">
                     <p class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
