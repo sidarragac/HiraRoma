@@ -4,6 +4,7 @@ import os
 class ImageProcessor:
     def __init__(self, image_path, tile_size):
         self.tile_size = tile_size  # Tamaño del cuadro en píxeles
+        self.image_path = image_path
         self.img = Image.open(image_path)
 
     def check_empty_tiles(self, img):
@@ -26,3 +27,5 @@ class ImageProcessor:
 
                 cropped_img.save(os.path.join(output_folder, f"cuadro{count}.png"))    
                 count += 1
+
+        os.remove(self.image_path)
