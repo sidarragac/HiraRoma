@@ -4,7 +4,7 @@ from controllers.translator import (
     translate_char,
     process_char,
     translate_text,
-    process_text
+    # process_text
 )
 
 # Blueprints
@@ -31,9 +31,12 @@ def translate_one_result():
 def translate():
     return translate_text()
 
-@translate_bp.route('/text/result', methods=['POST'])
-def translate_result():
-    return process_text()
+# @translate_bp.route('/text/result', methods=['POST'])
+# def translate_result():
+#     if 'image' not in request.files:
+#         return {'error': 'No image provided'}, 400
+#     image = request.files['image']
+#     return process_text(image)
 
 def register_routes(app):
     app.register_blueprint(home_bp, url_prefix='/')
