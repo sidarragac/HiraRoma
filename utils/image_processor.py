@@ -3,7 +3,6 @@ import os
 
 class ImageProcessor:
     def __init__(self, image_path, tile_size):
-        self.supported_formats = ['PNG', 'JPG']
         self.tile_size = tile_size  # Tamaño del cuadro en píxeles
         self.img = Image.open(image_path)
 
